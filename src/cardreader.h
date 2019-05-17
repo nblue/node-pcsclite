@@ -82,9 +82,9 @@ class CardReader: public Nan::ObjectWrap {
 
     public:
 
-        static void init(v8::Handle<v8::Object> target);
+        static void init(v8::Local<v8::Object> target);
 
-        const SCARDHANDLE& GetHandler() const { return m_card_handle; };
+        const SCARDHANDLE& GetLocalr() const { return m_card_handle; };
 
     private:
 
@@ -102,8 +102,8 @@ class CardReader: public Nan::ObjectWrap {
         static NAN_METHOD(Control);
         static NAN_METHOD(Close);
 
-        static void HandleReaderStatusChange(uv_async_t *handle, int status);
-        static void HandlerFunction(void* arg);
+        static void LocalReaderStatusChange(uv_async_t *handle, int status);
+        static void LocalrFunction(void* arg);
         static void DoConnect(uv_work_t* req);
         static void DoDisconnect(uv_work_t* req);
         static void DoTransmit(uv_work_t* req);
@@ -115,7 +115,7 @@ class CardReader: public Nan::ObjectWrap {
         static void AfterTransmit(uv_work_t* req, int status);
         static void AfterControl(uv_work_t* req, int status);
 
-        static v8::Handle<v8::Value> CreateBufferInstance(char* data, unsigned long size);
+        static v8::Local<v8::Value> CreateBufferInstance(char* data, unsigned long size);
 
     private:
 
